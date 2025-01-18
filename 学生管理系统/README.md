@@ -7,17 +7,17 @@
 
 
 # 组件
-BrowserRouter：整个前端路由以 history 模式开始，包裹根组件
-HashRouter：整个前端路由以 hash 模式开始，包裹根组件
-Routes：类似于 v5 版本的 Switch，主要是提供一个上下文环境
-Route：在 Route 组件中书写你对应的路由，以及路由所对应的组件
-path：匹配的路由
-element：匹配上该路由时，要渲染的组件
-Navigate：导航组件，类似于 useNavigate 的返回值函数，只不过这是一个组件
-NavLink：类似于 Link，最终和 Link 一样，会被渲染为 a 标签，注意它和 Link 的区别，实际上就是当前链接，会有一个名为 active 的激活样式，所以一般用于做顶部或者左侧导航栏的跳转
-Hooks
-useLocation：获取到 location 对象，获取到 location 对象后，我们可以获取 state 属性，这往往是其他路由跳转过来的时候，会在 state 里面传递额外的数据
-useNavigate：调用之后会返回一个函数，通过该函数可以做跳转。
+- BrowserRouter：整个前端路由以 history 模式开始，包裹根组件
+- HashRouter：整个前端路由以 hash 模式开始，包裹根组件
+- Routes：类似于 v5 版本的 Switch，主要是提供一个上下文环境
+- Route：在 Route 组件中书写你对应的路由，以及路由所对应的组件
+- path：匹配的路由
+- element：匹配上该路由时，要渲染的组件
+- Navigate：导航组件，类似于 useNavigate 的返回值函数，只不过这是一个组件
+- NavLink：类似于 Link，最终和 Link 一样，会被渲染为 a 标签，注意它和 Link 的区别，实际上就是当前链接，会有一个名为 active 的激活样式，所以一般用于做顶部或者左侧导航栏的跳转
+# Hooks
+- useLocation：获取到 location 对象，获取到 location 对象后，我们可以获取 state 属性，这往往是其他路由跳转过来的时候，会在 state 里面传递额外的数据
+- useNavigate：调用之后会返回一个函数，通过该函数可以做跳转。
 useParams：获取动态参数
 
 
@@ -77,5 +77,5 @@ export default Router;
        ]
  },
  ```
- 
+
 
