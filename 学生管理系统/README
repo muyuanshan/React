@@ -1,0 +1,3 @@
+启动server端服务
+进入到server的文件夹 npm run json:server
+启动client 服务 yarn start
