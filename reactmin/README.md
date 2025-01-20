@@ -7,3 +7,5 @@
    挂在一些属性，因为`type`的不同，所以给不同的`type`打`tag`，然后输出fiber这个节点。
 到此我们就完成一个fiber的创建
 # work loop流程
+这里主要是说一下`scheduleUpdateOnFiber`方法是最终抛出来的，在`react-dom/ReactDom`中的`updateContainer`方法中执行，具体逻辑在
+`reconciler/ReactFiberWorkLoop`中
