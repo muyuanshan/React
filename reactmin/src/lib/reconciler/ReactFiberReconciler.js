@@ -26,3 +26,31 @@ export function updateHostComponent(wip) {
 export function updateHostTextComponent(wip) {
   wip.stateNode = document.createTextNode(wip.props.children);
 }
+
+/**
+ * 更新函数组件
+ * @param {*} wip 需要处理的 fiber 对象节点
+ */
+export function updateFunctionComponent(wip) {
+  const { type, props } = wip;
+  // 这里从当前wip中获取到的type是一个函数
+  // 执行这个type获取他的返回值
+  const children = type(props);
+
+  // 有了他的vnode节点之后，调用reconcileChildren方法，处理子节点
+  reconcileChildren(wip, children)
+}
+
+/**
+ * 更新类组件
+ * @param {*} wip 需要处理的 fiber 对象节点
+ */
+export function updateClassComponent(wip) {
+  const { type, props } = wip;
+  // 这里的type是一个类，把这个类实例化
+  const instance = new type(props);
+  // 调用render获取他的返回值
+  const children = instance.render();
+
+  reconcileChildren(wip, children);
+}

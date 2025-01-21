@@ -47,3 +47,12 @@
 - 提交自己
 - 提交自己的子节点
 - 提交自己的兄弟节点
+
+# 初始化函数组件和类组件渲染
+这一块用的例子是类组件，函数组件的效果自行解开注释进行操作即可
+1. 新建了一个`react/React.js`文件，这个文件主要是添加一个属性`isReactComponent`, 为什么要加这个属性，因为`Component`本质上还是一个函数（构造函数），所以我们要在其原型上添加一个标识，来说明他是一个类组件，防止在打tag的时候打成函数组件的tag。
+2. `ReactFiberReconciler.js`文件中的新增两个函数`updateFunctionComponent`, `updateClassComponent`, 分别处理函数组件和类组件，调用子协调器，处理各自的子vnode
+3. 在`ReactFiberBeginWork.js`文件中，对应的tag去执行`updateFunctionComponent`和`updateClassComponent`方法
+
+![alt text](src/assets/image-class.png)
+
