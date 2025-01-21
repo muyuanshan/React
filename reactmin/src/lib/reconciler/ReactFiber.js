@@ -6,7 +6,7 @@ import { FunctionComponent, ClassComponent, HostComponent, HostText, Fragment } 
  * @param {*} vnode 当前的vnode节点
  * @param {*} returnFiber 父Fiber节点
  */
-function FiberNode(vnode, returnFiber) {
+function createFiber(vnode, returnFiber) {
     const fiber = {
         type: vnode.type, // fiber类型
         key: vnode.key,
@@ -55,4 +55,4 @@ function FiberNode(vnode, returnFiber) {
     return fiber;
 }
 
-export default FiberNode;
+export default createFiber;

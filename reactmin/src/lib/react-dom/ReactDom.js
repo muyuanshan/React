@@ -12,7 +12,6 @@ function updateContainer(element, container) {
         type: container.nodeName.toLowerCase(),
         stateNode: container,
     })
-
     scheduleUpdateOnFiber(fiber);
 }
 

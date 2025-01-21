@@ -1,4 +1,7 @@
-// 该文件负责整个 React 的一个执行流行
+// 该文件负责整个 React 的一个执行流程
+import beginWork from "./ReactFiberBeginWork";
+import completeWork from "./ReactFiberCompleteWork";
+import commitWorker from "./ReactFiberCommitWork";
 
 // wip 的英语全称为 work in progress，表示正在进行的工作
 // 我们使用这个变量来保存当前正在进行的工作 fiber 对象
@@ -28,14 +31,14 @@ function scheduleUpdateOnFiber(fiber) {
  * @param {*} deadline 每一帧有剩余的时间
  */
 function workloop(deadline) {
-  while (wip && deadline > 0) {
+  while (wip &&  deadline.timeRemaining() > 0) {
     // 进入到这个循环里面说明现在有需要处理的节点 && 还有时间处理
 
     perfromUintOfWork(); // 负责处理一个fiber
 
     // 代码来到这里说明 要么是这个fiber不用管，要么是循环完成了
     if (!wip) {
-      // 我们需要将wip给提交过程
+      // 我们需要将wip给提交过程, 整个fiber树都处理完了
       commitRoot();
     }
   }
@@ -50,7 +53,7 @@ function workloop(deadline) {
  * 4. 进行渲染
  */
 function perfromUintOfWork() {
-  // beginWork(wip); // 处理当前对象
+  beginWork(wip); // 处理当前对象
 
   // 如果说有子节点，改变wip 指向子节点
   if (wip.child) {
@@ -58,7 +61,8 @@ function perfromUintOfWork() {
     return;
   }
 
-  // completeWork(wip);
+  completeWork(wip);
+
 
   let next = wip;
 
@@ -72,7 +76,7 @@ function perfromUintOfWork() {
     next = next.return;
 
     // 在找父辈的之前先执行一下这个
-    // completeWork(wip);
+    completeWork(wip);
   }
 
   // 如果执行到这里，说明整个 fiber 树都处理完了
@@ -80,6 +84,10 @@ function perfromUintOfWork() {
   wip = null;
 }
 
-function commitRoot() {}
+function commitRoot() {
+  commitWorker(wipRoot);
+  // 渲染完成后将 wipRoot 置为 null
+  wipRoot = null;
+}
 
 export default scheduleUpdateOnFiber;
