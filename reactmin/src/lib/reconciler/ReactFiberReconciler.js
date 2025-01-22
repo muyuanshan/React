@@ -1,6 +1,6 @@
 import { updateNode } from "../shared/utils";
 import { reconcileChildren } from "./ReactChildFiber.js";
-
+import { renderWithHooks } from "../react/ReactHooks.js";
 /**
  *
  * @param {*} wip 需要处理的fiber节点
@@ -32,6 +32,9 @@ export function updateHostTextComponent(wip) {
  * @param {*} wip 需要处理的 fiber 对象节点
  */
 export function updateFunctionComponent(wip) {
+    // 进入到这里，也就是说，我确定你是一个函数组件
+  // 那么在处理 fiber 树之前，我们先处理 hooks
+  renderWithHooks(wip);
   const { type, props } = wip;
   // 这里从当前wip中获取到的type是一个函数
   // 执行这个type获取他的返回值
